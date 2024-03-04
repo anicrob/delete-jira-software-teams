@@ -10,7 +10,7 @@ const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 require("dotenv").config();
 const path = "./Teams.csv";
-let index = 100
+let i = 0
 
 //function to delete teams
 const deleteTeams = async (ids) => {
@@ -18,7 +18,7 @@ const deleteTeams = async (ids) => {
     //every 2 seconds, delete a team
     setTimeout(async () => {
       const response = await fetch(
-        `${process.env.URL}/gateway/api/public/teams/v1/org/${process.env.ORG_ID}/teams/${ids[index]}`,
+        `${process.env.URL}/gateway/api/public/teams/v1/org/${process.env.ORG_ID}/teams/${ids[i]}`,
         {
           method: "DELETE",
           headers: {
@@ -30,17 +30,17 @@ const deleteTeams = async (ids) => {
 
       if (!response.ok) {
         //if the response was not ok, show the status
-        console.log(`${new Date().toGMTString()} - ${response.status} ${response.statusText} has occured trying to delete team with id ${ids[index]}`) ;
+        console.log(`${new Date().toGMTString()} - ${response.status} ${response.statusText} has occured trying to delete team with id ${ids[i]}`) ;
         //increase the index
-        index += 1
+        i += 1
         //continue deleting the rest of the teams
         deleteTeams(ids);
         return;
       }
       //if the index is less than the last index in the ids array
-      if(index < ids.length - 1){
+      if(i < ids.length - 1){
         //add 1 to the index to continue moving through the array
-        index += 1
+        i += 1
         //call deleteTeams function again
         deleteTeams(ids);
       } else {
@@ -49,10 +49,10 @@ const deleteTeams = async (ids) => {
         return;
       }
       //let the user know that the script has successfully deleted a certain team
-      console.log(`${new Date().toGMTString()} - this team has been sucessfully deleted: ${ids[index]}\n`);
-    }, 1000);
+      console.log(`${new Date().toGMTString()} - this team has been sucessfully deleted: ${ids[i]}\n`);
+    }, 2000);
   } catch (err) {
-    console.log(err, index);
+    console.log(err, i);
   }
 };
 
