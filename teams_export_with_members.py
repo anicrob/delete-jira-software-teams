@@ -77,22 +77,22 @@ def get_teams(email, token, instance_name, org_id, site_id):
 # Function to write data to CSV file
 def write_to_csv(teams):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    filename = f"Teams-{timestamp}.csv"
+    filename = f"Teams.csv"
 
     with open(filename, mode="w", newline="", encoding="utf-8") as file:
         fieldnames = [
             "id",
-            "displayName",
-            "description",
-            "state",
-            "organizationId",
-            "membershipSettings",
-            "memberCount",
-            "members",
-            "largeAvatarImageUrl",
-            "smallAvatarImageUrl",
-            "largeHeaderImageUrl",
-            "smallHeaderImageUrl"
+            # "displayName",
+            # "description",
+            # "state",
+            # "organizationId",
+            # "membershipSettings",
+            # "memberCount",
+            # "members",
+            # "largeAvatarImageUrl",
+            # "smallAvatarImageUrl",
+            # "largeHeaderImageUrl",
+            # "smallHeaderImageUrl"
         ]
 
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -102,22 +102,22 @@ def write_to_csv(teams):
             team_data = team["team"]
             row_data = {
                 "id": team_data.get("id", "").replace("ari:cloud:identity::team/", ""),
-                "displayName": team_data.get("displayName", ""),
-                "description": team_data.get("description", ""),
-                "state": team_data.get("state", ""),
-                "organizationId": team_data.get("organizationId", "").replace("ari:cloud:platform::org/", ""),
-                "membershipSettings": team_data.get("membershipSettings", ""),
-                "memberCount": team.get("memberCount", ""),
-                "largeAvatarImageUrl": team_data.get("largeAvatarImageUrl", ""),
-                "smallAvatarImageUrl": team_data.get("smallAvatarImageUrl", ""),
-                "largeHeaderImageUrl": team_data.get("largeHeaderImageUrl", ""),
-                "smallHeaderImageUrl": team_data.get("smallHeaderImageUrl", ""),
+                # "displayName": team_data.get("displayName", ""),
+                # "description": team_data.get("description", ""),
+                # "state": team_data.get("state", ""),
+                # "organizationId": team_data.get("organizationId", "").replace("ari:cloud:platform::org/", ""),
+                # "membershipSettings": team_data.get("membershipSettings", ""),
+                # "memberCount": team.get("memberCount", ""),
+                # "largeAvatarImageUrl": team_data.get("largeAvatarImageUrl", ""),
+                # "smallAvatarImageUrl": team_data.get("smallAvatarImageUrl", ""),
+                # "largeHeaderImageUrl": team_data.get("largeHeaderImageUrl", ""),
+                # "smallHeaderImageUrl": team_data.get("smallHeaderImageUrl", ""),
             }
 
             # Extract member information
-            members = team_data.get("members", {}).get("nodes", [])
-            member_data_list = [{"id": member["member"]["id"].replace("ari:cloud:identity::user/", ""), "name": member["member"]["name"]} for member in members]
-            row_data["members"] = member_data_list
+            # members = team_data.get("members", {}).get("nodes", [])
+            # member_data_list = [{"id": member["member"]["id"].replace("ari:cloud:identity::user/", ""), "name": member["member"]["name"]} for member in members]
+            # row_data["members"] = member_data_list
 
             writer.writerow(row_data)
 

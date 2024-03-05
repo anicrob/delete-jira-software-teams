@@ -11,8 +11,7 @@
 While doing test migrations, the Jira Software teams get copied over to the Jira organization (meaning it is visible across sites). After doing a few tests, this will leave you having to manually delete hundreds or even thousands of teams. To do this programically, there's a few steps:
 
 1. Run the Python script to GET the ids of all of the teams in a CSV file
-2. Copy the first column (with the header name) only to Teams.csv
-3. Run the Node.js script to DELETE the teams
+2. Run the Node.js script to DELETE the teams
 
 ```
 Note: the roadmap is to get this script onto one Python script and remove any manual work
@@ -23,7 +22,10 @@ Note: the roadmap is to get this script onto one Python script and remove any ma
 ## Instructions for Step 1
 
 ### Step 1: Download Python and Verify Installation
-If you haven't installed Python yet, you can download the latest version from the official [Python website](https://www.python.org/downloads/). After installation, open a command prompt or terminal and use the following command to verify the installation: python --version
+If you haven't installed Python yet, you can download the latest version from the official [Python website](https://www.python.org/downloads/). After installation, open a command prompt or terminal and use the following command to verify the installation: 
+```
+python --version
+```
 
 Alternatively, if you're using Python 3, you may need to use the 'python3' command instead of 'python': python3 --version
 
@@ -31,6 +33,13 @@ This should display the installed Python version:
 
 [pending images]
 
+Also be sure to add Python to your path if this the first time you are using Python. [Resource](https://phoenixnap.com/kb/add-python-to-path). [Here's](https://blog.enterprisedna.co/where-is-python-installed/) how to find the python path.
+
+Also ensure you have the requests package installed by running this:
+
+```
+$ python -m pip install requests
+```
 
 
 ### Step 2: Download the Python Script
@@ -44,7 +53,7 @@ For Python 3 users: python3 teams_export_with_members.py.
 The script will sequentially request the following information:
 
 1. Atlassian Account username. This is the email address used to log in.
-2. API token. If you do not possess one, you can generate it following the instructions provided here: [Create an API token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/#Create-an-API-token).
+2. API token. If you do not possess one, you can generate it following the instructions provided here: [Create an API token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/#Create-an-API-token). (Note this is NOT in base64 format!)
 3. Organization ID. [What it is the Organization ID and where to find it](https://confluence.atlassian.com/jirakb/what-it-is-the-organization-id-and-where-to-find-it-1207189876.html).
 4. Site ID. [How to find Cloud Site Id](https://confluence.atlassian.com/jirakb/how-to-find-cloud-site-id-1272283178.html).
 
@@ -53,12 +62,6 @@ After entering this data, the script will fetch Teams and Team Members, generati
 
 
 ## Instructions for Step 2
-
-With that CSV file created in step 1, copy ONLY the first column (including the id column header title) and past it into Teams.csv.
-
-This way the Node script can read the file to get the team ids
-
-## Instructions for Step 3
 
 Here are the setup steps:
 
