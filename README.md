@@ -14,7 +14,7 @@ While doing test migrations, the Jira Software teams get copied over to the Jira
 2. Run the Node.js script to DELETE the teams
 
 ```
-Note: the roadmap is to get this script onto one Python script and remove any manual work
+Note: the roadmap is to get this script onto one Python script
 ```
 
 ## Setup Instructions
@@ -46,9 +46,16 @@ $ python -m pip install requests
 Ensure that you have a directory set up with the teams_export_with_members.py script.
 
 ### Step 3: Execute the Python Script
-Open a command prompt or terminal, navigate to the script's directory, and run it using the following command: python teams_export_with_members.py
+Open a command prompt or terminal, navigate to the script's directory, and run it using the following command: 
 
-For Python 3 users: python3 teams_export_with_members.py.
+```
+python teams_export_with_members.py
+```
+
+For Python 3 users: 
+```
+python3 teams_export_with_members.py
+```
 
 The script will sequentially request the following information:
 

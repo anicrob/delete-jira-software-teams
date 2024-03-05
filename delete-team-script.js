@@ -15,7 +15,7 @@ let i = 0
 //function to delete teams
 const deleteTeams = async (ids) => {
   try {
-    //every 2 seconds, delete a team
+    //every second, delete a team
     setTimeout(async () => {
       const response = await fetch(
         `${process.env.URL}/gateway/api/public/teams/v1/org/${process.env.ORG_ID}/teams/${ids[i]}`,
@@ -50,7 +50,7 @@ const deleteTeams = async (ids) => {
       }
       //let the user know that the script has successfully deleted a certain team
       console.log(`${new Date().toGMTString()} - this team has been sucessfully deleted: ${ids[i]}\n`);
-    }, 2000);
+    }, 1000);
   } catch (err) {
     console.log(err, i);
   }
