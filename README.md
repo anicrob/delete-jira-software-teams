@@ -28,7 +28,8 @@ python --version
 ```
 
 Alternatively, if you're using Python 3, you may need to use the 'python3' command instead of 'python': 
-```python3 --version
+```
+python3 --version
 ```
 
 This should display the installed Python version:
