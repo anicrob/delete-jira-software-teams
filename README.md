@@ -27,7 +27,9 @@ If you haven't installed Python yet, you can download the latest version from th
 python --version
 ```
 
-Alternatively, if you're using Python 3, you may need to use the 'python3' command instead of 'python': python3 --version
+Alternatively, if you're using Python 3, you may need to use the 'python3' command instead of 'python': 
+```python3 --version
+```
 
 This should display the installed Python version:
 
