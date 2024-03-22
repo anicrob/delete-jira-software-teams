@@ -10,7 +10,7 @@ const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 require("dotenv").config();
 const path = "./Teams.csv";
-let i = 0
+let i = 0;
 
 //function to delete teams
 const deleteTeams = async (ids) => {
@@ -30,26 +30,37 @@ const deleteTeams = async (ids) => {
 
       if (!response.ok) {
         //if the response was not ok, show the status
-        console.log(`${new Date().toGMTString()} - ${response.status} ${response.statusText} has occured trying to delete team with id ${ids[i]}`) ;
+        console.log(
+          `${new Date().toGMTString()} - ${response.status} ${
+            response.statusText
+          } has occured trying to delete team with id ${ids[i]}`
+        );
         //increase the index
-        i += 1
+        i += 1;
         //continue deleting the rest of the teams
-        deleteTeams(ids);
+        await deleteTeams(ids);
         return;
       }
-      //if the index is less than the last index in the ids array
-      if(i < ids.length - 1){
+      //if the index is less than the last index in the ids array and removes the extra space
+      if (i < ids.length - 2) {
         //add 1 to the index to continue moving through the array
-        i += 1
+        i += 1;
+        //let the user know that the script has successfully deleted a certain team
+        console.log(
+          `${new Date().toGMTString()} - this team has been sucessfully deleted: ${
+            ids[i]
+          }\n`
+        );
         //call deleteTeams function again
-        deleteTeams(ids);
+        await deleteTeams(ids);
+        return;
       } else {
         //if there are no more ids left, let the user know the script is done!
-        console.log(`${new Date().toGMTString()} - There are no more team ids left. Please check the debug.log file for errors.`)
+        console.log(
+          `${new Date().toGMTString()} - There are no more team ids left. Please check the debug.log file for errors.`
+        );
         return;
       }
-      //let the user know that the script has successfully deleted a certain team
-      console.log(`${new Date().toGMTString()} - this team has been sucessfully deleted: ${ids[i]}\n`);
     }, 1000);
   } catch (err) {
     console.log(err, i);
@@ -78,7 +89,11 @@ const getIdsDeleteTeams = async () => {
 
     //remove the "id" header
     const content = output.splice(1);
-    
+
+    console.log(content);
+
+    console.log(content[content.length - 1]);
+
     //send ids to the deleteTeams function to delete
     deleteTeams(content);
   });
