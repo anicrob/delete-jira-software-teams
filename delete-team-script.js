@@ -90,10 +90,6 @@ const getIdsDeleteTeams = async () => {
     //remove the "id" header
     const content = output.splice(1);
 
-    console.log(content);
-
-    console.log(content[content.length - 1]);
-
     //send ids to the deleteTeams function to delete
     deleteTeams(content);
   });
